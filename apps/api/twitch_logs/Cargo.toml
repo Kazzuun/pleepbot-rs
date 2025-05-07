@@ -1,0 +1,15 @@
+[package]
+name = "logs_api"
+version = "0.1.0"
+description = "A Twitch message logging api"
+edition.workspace = true
+publish.workspace = true
+
+[dependencies]
+actix-web.workspace = true
+chrono.workspace = true
+dotenvy.workspace = true
+envy.workspace = true
+serde.workspace = true
+twitch-irc.workspace = true
+twitch_api.workspace = true

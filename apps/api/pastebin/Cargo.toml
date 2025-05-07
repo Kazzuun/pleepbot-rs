@@ -1,0 +1,12 @@
+[package]
+name = "pastebin_api"
+version = "0.1.0"
+description = ""
+edition.workspace = true
+publish.workspace = true
+
+[dependencies]
+actix-web.workspace = true
+dotenvy.workspace = true
+envy.workspace = true
+serde.workspace = true

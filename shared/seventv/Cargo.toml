@@ -1,0 +1,12 @@
+[package]
+name = "seventv"
+version = "0.1.0"
+description = "A wrapper for 7tv API"
+edition.workspace = true
+publish.workspace = true
+
+[dependencies]
+chrono.workspace = true
+reqwest.workspace = true
+serde.workspace = true
+ulid.workspace = true
