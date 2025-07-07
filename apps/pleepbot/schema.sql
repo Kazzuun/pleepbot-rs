@@ -142,9 +142,9 @@ CREATE TABLE twitch.custom_command_channel_links (
 
 CREATE TABLE timeseries.username_history (
     id serial PRIMARY KEY,
-    user_id text REFERENCES twitch.users(user_id),
-    username text,
-    timestamp timestamptz DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    user_id text NOT NULL REFERENCES twitch.users(user_id),
+    username text NOT NULL,
+    timestamp timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP NOT NULL,
 );
 
 

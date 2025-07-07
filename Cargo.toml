@@ -1,10 +1,10 @@
 [workspace]
 resolver = "3"
 members = [
-    "apps/api/link_shortener",
-    "apps/api/pastebin",
-    "apps/api/pleepbot_api",
-    "apps/api/twitch_logs",
+    "apps/link_shortener",
+    "apps/pastebin",
+    "apps/pleepbot_api",
+    "apps/twitch_logs",
     "apps/pleepbot",
     "shared/db",
     "shared/seventv",
@@ -21,20 +21,21 @@ db = { path = "shared/db" }
 seventv = { path = "shared/seventv" }
 twitch_bot = { path = "shared/twitch_bot" }
 
-actix-web = "4.10.2"
+axum = { version = "0.8.4" }
 anyhow = "1.0.97"
 chrono = { version = "0.4.40", features = ["serde"] }
 dotenvy = "0.15.7"
 envy = "0.4.2"
-nanoid = "0.4.0"
-reqwest = { version = "0.12.15", features = ["json"] }
+reqwest = { version = "0.12.22", features = ["json"] }
 serde = { version = "1.0.219", features = ["derive"] }
 serde_json = "1.0.140"
-sqlx = { version = "0.8.5", features = ["runtime-tokio", "tls-native-tls", "postgres", "macros", "chrono", "derive"] }
+sqlx = { version = "0.8.6", features = ["runtime-tokio-rustls", "tls-native-tls", "postgres", "macros", "chrono", "derive"] }
 thiserror = "2.0.12"
-tokio = { version = "1.45.0", features = ["full"] }
+tokio = { version = "1.46.1", features = ["full"] }
+tower = "0.5.2"
 tracing = "0.1.41"
 tracing-subscriber = "0.3.19"
 twitch_api = "0.7.2"
 twitch-irc = "5.0.1"
 ulid = { version = "1.2.1", features = ["serde"] }
+utoipa = "5.4.0"

@@ -1,0 +1,16 @@
+services:
+  database:
+    image: postgres:17.5
+    container_name: pleepbot_db
+    restart: always
+    ports:
+      - "5432:5432"
+    env_file:
+      - .env
+    environment:
+      - POSTGRES_DB=postgres
+    volumes:
+      - pleepbot_data:/var/lib/postgresql/data
+
+volumes:
+  pleepbot_data:

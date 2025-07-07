@@ -1,12 +1,12 @@
 [package]
-name = "pleepbot_api"
+name = "pastebin_api"
 version = "0.1.0"
-description = "An api for pleepbot"
+description = ""
 edition.workspace = true
 publish.workspace = true
 
 [dependencies]
-actix-web.workspace = true
+axum.workspace = true
 dotenvy.workspace = true
 envy.workspace = true
 serde.workspace = true

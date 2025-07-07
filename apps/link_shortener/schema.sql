@@ -1,5 +1,3 @@
-CREATE SCHEMA link_shortener;
-
 CREATE TABLE link_shortener.links (
     id SERIAL PRIMARY KEY,
     original_url TEXT NOT NULL,
