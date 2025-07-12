@@ -42,7 +42,7 @@ CREATE TABLE public._sqlx_migrations (
 CREATE TABLE public.clicks (
     id integer NOT NULL,
     link_id integer NOT NULL,
-    clicked_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
+    clicked_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
 
 
