@@ -1,8 +1,9 @@
+use envy::Error;
 use serde::Deserialize;
 use sqlx::postgres::{PgPool, PgPoolOptions};
 
 #[derive(Deserialize, Debug)]
-pub struct Config {
+pub struct DatabaseConfig {
     pguser: String,
     pgpassword: String,
     pgdatabase: String,
@@ -10,9 +11,10 @@ pub struct Config {
     pgport: u16,
 }
 
-impl Config {
-    pub fn from_env() -> Self {
-        envy::from_env().expect("Failed to load configuration from environment variables")
+impl DatabaseConfig {
+    pub fn from_env() -> Result<Self, Error> {
+        dotenvy::dotenv().ok();
+        envy::from_env()
     }
 
     fn database_url(&self) -> String {
