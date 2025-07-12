@@ -1,4 +1,4 @@
-CREATE TABLE link_shortener.links (
+CREATE TABLE links (
     id SERIAL PRIMARY KEY,
     original_url TEXT NOT NULL,
     slug TEXT NOT NULL UNIQUE,
@@ -6,9 +6,9 @@ CREATE TABLE link_shortener.links (
     expires_at TIMESTAMPTZ DEFAULT NULL
 );
 
-CREATE TABLE link_shortener.clicks (
+CREATE TABLE clicks (
     id SERIAL PRIMARY KEY,
     link_id INTEGER NOT NULL,
     clicked_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (link_id) REFERENCES link_shortener.links (id)
+    FOREIGN KEY (link_id) REFERENCES links (id)
 );
