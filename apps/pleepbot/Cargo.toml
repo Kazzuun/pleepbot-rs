@@ -11,4 +11,4 @@ envy.workspace = true
 seventv.workspace = true
 twitch-irc.workspace = true
 twitch_api.workspace = true
-twitch_bot.workspace = true
+pleepbot_core.workspace = true

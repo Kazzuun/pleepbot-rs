@@ -1,6 +1,6 @@
-# Link shortener
+# Media api
 
-A basic implementation of a link shortener.
+Combines pastebin, file host and link shortener apis into one.
 
 ## Endpoints
 
@@ -17,6 +17,20 @@ A basic implementation of a link shortener.
 - [ ] GET /:slug/info
   - Returns metadata of the link
   - Returns original link, created at, expires at, clicks
+
+- [ ] POST /pastes
+  - Creates a new paste entry
+  - Request body:
+    - content
+    - language: (code, markdown, ...)
+    - expires at
+
+- [ ] GET /pastes/:slug
+  - Fetches the content and formats it
+
+- [ ] GET /pastes/:slug/raw
+  - Fetches the raw content
+
 
 ## Possibilities
 

@@ -1,5 +1,5 @@
 [package]
-name = "logs_api"
+name = "twitch-logs-api"
 version = "0.1.0"
 description = "A Twitch message logging api"
 edition.workspace = true

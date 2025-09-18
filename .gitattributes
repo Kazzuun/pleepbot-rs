@@ -1,1 +1,1 @@
-schemas/*.sql diff=sql
+**/docs/schema.sql diff=sql

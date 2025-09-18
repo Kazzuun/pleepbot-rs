@@ -1,7 +1,6 @@
 use axum::{Json, extract::State, http::StatusCode};
-use axum_extra::TypedHeader;
+use axum_extra::{TypedHeader, headers::Host};
 use chrono::{DateTime, Utc};
-use headers::Host;
 use serde::{Deserialize, Serialize};
 use sqlx::postgres::PgPool;
 use url::Url;

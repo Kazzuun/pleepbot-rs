@@ -33,7 +33,7 @@ default:
             -U ${POSTGRES_USER} \
             -d $crate \
             --no-owner --no-privileges \
-            > ./schemas/$crate.sql \
+            > ./apps/$crate/docs/schema.sql \
         && echo "Dumped database schema for $crate"; \
     done
 
@@ -47,3 +47,9 @@ migrate-run crate *args:
 alias migrate-down := migrate-revert
 migrate-revert crate *args:
     sqlx migrate revert --source ./apps/{{crate}}/migrations -D {{database_url_base}}/{{crate}} {{ args }}
+
+@sqlx-prepare:
+    for crate in `ls ./apps`; do \
+        cargo sqlx prepare --database-url {{database_url_base}}/$crate --workspace -- --bin $crate \
+            && echo "Prapered sqlx queries for $crate"; \
+    done

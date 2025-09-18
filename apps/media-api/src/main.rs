@@ -2,6 +2,8 @@ mod app;
 mod error;
 mod routes;
 
+use std::net::{Ipv4Addr, SocketAddr};
+
 use db::connection::DatabaseConfig;
 
 // https://github.com/tokio-rs/axum/tree/main/examples/sqlx-postgres
@@ -17,6 +19,7 @@ async fn main() {
 
     let app = app::router(pool);
 
-    let listener = tokio::net::TcpListener::bind("0.0.0.0:3001").await.unwrap();
+    let address = SocketAddr::from((Ipv4Addr::UNSPECIFIED, 3000));
+    let listener = tokio::net::TcpListener::bind(address).await.unwrap();
     axum::serve(listener, app).await.unwrap();
 }

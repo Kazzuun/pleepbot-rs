@@ -1133,31 +1133,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "link_shortener"
-version = "0.1.0"
-dependencies = [
- "axum",
- "axum-extra",
- "chrono",
- "db",
- "dotenvy",
- "envy",
- "headers",
- "nanoid",
- "serde",
- "serde_json",
- "sqlx",
- "thiserror 2.0.12",
- "tokio",
- "tracing",
- "tracing-subscriber",
- "url",
- "utoipa",
- "utoipa-axum",
- "utoipa-swagger-ui",
-]
-
-[[package]]
 name = "linux-raw-sys"
 version = "0.9.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1186,23 +1161,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "13dc2df351e3202783a1fe0d44375f7295ffb4049267b0f3018346dc122a1d94"
 
 [[package]]
-name = "logs_api"
-version = "0.1.0"
-dependencies = [
- "axum",
- "chrono",
- "dotenvy",
- "envy",
- "serde",
- "tokio",
- "tower 0.5.2",
- "tracing",
- "tracing-subscriber",
- "twitch-irc",
- "twitch_api",
-]
-
-[[package]]
 name = "matchers"
 version = "0.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1225,6 +1183,30 @@ checksum = "d89e7ee0cfbedfc4da3340218492196241d89eefb6dab27de5df917a6d2e78cf"
 dependencies = [
  "cfg-if",
  "digest",
+]
+
+[[package]]
+name = "media-api"
+version = "0.1.0"
+dependencies = [
+ "axum",
+ "axum-extra",
+ "chrono",
+ "db",
+ "dotenvy",
+ "envy",
+ "nanoid",
+ "serde",
+ "serde_json",
+ "sqlx",
+ "thiserror 2.0.12",
+ "tokio",
+ "tracing",
+ "tracing-subscriber",
+ "url",
+ "utoipa",
+ "utoipa-axum",
+ "utoipa-swagger-ui",
 ]
 
 [[package]]
@@ -1453,16 +1435,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "57c0d7b74b563b49d38dae00a0c37d4d6de9b432382b2892f0574ddcae73fd0a"
 
 [[package]]
-name = "pastebin"
-version = "0.1.0"
-dependencies = [
- "axum",
- "dotenvy",
- "envy",
- "serde",
-]
-
-[[package]]
 name = "pem-rfc7468"
 version = "0.7.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1522,21 +1494,15 @@ version = "0.1.0"
 dependencies = [
  "dotenvy",
  "envy",
+ "pleepbot_core",
  "seventv",
  "twitch-irc",
  "twitch_api",
- "twitch_bot",
 ]
 
 [[package]]
-name = "pleepbot_api"
+name = "pleepbot_core"
 version = "0.1.0"
-dependencies = [
- "axum",
- "dotenvy",
- "envy",
- "serde",
-]
 
 [[package]]
 name = "potential_utf"
@@ -2678,10 +2644,6 @@ dependencies = [
  "url",
  "version_check",
 ]
-
-[[package]]
-name = "twitch_bot"
-version = "0.1.0"
 
 [[package]]
 name = "twitch_types"

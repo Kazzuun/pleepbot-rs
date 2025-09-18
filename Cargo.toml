@@ -1,25 +1,23 @@
 [workspace]
 resolver = "3"
 members = [
-    "apps/link_shortener",
-    "apps/pastebin",
-    "apps/pleepbot_api",
-    "apps/twitch_logs",
+    "apps/media-api",
     "apps/pleepbot",
-    "shared/db",
-    "shared/seventv",
-    "shared/twitch_bot",
+    # "apps/pleepbot-api",
+    # "apps/twitch-logs-api",
+    "shared/utils/db",
+    "shared/integrations/seventv",
+    "shared/bot/core",
 ]
-default-members = ["apps/pleepbot"]
 
 [workspace.package]
 edition = "2024"
 publish = false
 
 [workspace.dependencies]
-db = { path = "shared/db" }
-seventv = { path = "shared/seventv" }
-twitch_bot = { path = "shared/twitch_bot" }
+db = { path = "shared/utils/db" }
+pleepbot_core = { path = "shared/bot/core" }
+seventv = { path = "shared/integrations/seventv" }
 
 axum = "0.8.4"
 axum-extra = { version = "0.10.1", features = ["typed-header"]}
@@ -27,7 +25,6 @@ anyhow = "1.0.97"
 chrono = { version = "0.4.40", features = ["serde"] }
 dotenvy = "0.15.7"
 envy = "0.4.2"
-headers = "0.4.1"
 reqwest = { version = "0.12.22", features = ["json"] }
 serde = { version = "1.0.219", features = ["derive"] }
 serde_json = "1.0.140"

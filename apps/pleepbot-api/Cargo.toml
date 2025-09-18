@@ -1,5 +1,5 @@
 [package]
-name = "pleepbot_api"
+name = "pleepbot-api"
 version = "0.1.0"
 description = "An api for pleepbot"
 edition.workspace = true
