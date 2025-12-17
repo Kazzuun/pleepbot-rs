@@ -8,7 +8,7 @@ publish.workspace = true
 [dependencies]
 dotenvy.workspace = true
 envy.workspace = true
-seventv.workspace = true
+seventv_gql_api.workspace = true
 twitch-irc.workspace = true
 twitch_api.workspace = true
 pleepbot_core.workspace = true

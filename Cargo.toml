@@ -6,8 +6,9 @@ members = [
     # "apps/pleepbot-api",
     # "apps/twitch-logs-api",
     "shared/utils/db",
-    "shared/integrations/seventv",
-    "shared/bot/core",
+    "shared/integrations/seventv_gql",
+    "shared/integrations/seventv_gql/examples/*",
+    "shared/bot/core", "shared/integrations/seventv_rest",
 ]
 
 [workspace.package]
@@ -15,20 +16,29 @@ edition = "2024"
 publish = false
 
 [workspace.dependencies]
-db = { path = "shared/utils/db" }
-pleepbot_core = { path = "shared/bot/core" }
-seventv = { path = "shared/integrations/seventv" }
-
-axum = "0.8.4"
-axum-extra = { version = "0.10.1", features = ["typed-header"]}
+async-trait = "0.1.89"
+axum = { version = "0.8.4", features = ["macros"] }
+axum-extra = { version = "0.10.1", features = ["typed-header"] }
 anyhow = "1.0.97"
 chrono = { version = "0.4.40", features = ["serde"] }
+cynic = { version = "3.12.0", features = ["http-reqwest", "rkyv"] }
+cynic-codegen = { version = "3.12.0", features = ["rkyv"] }
+db = { path = "shared/utils/db" }
 dotenvy = "0.15.7"
 envy = "0.4.2"
+pleepbot_core = { path = "shared/bot/core" }
 reqwest = { version = "0.12.22", features = ["json"] }
 serde = { version = "1.0.219", features = ["derive"] }
 serde_json = "1.0.140"
-sqlx = { version = "0.8.6", features = ["runtime-tokio-rustls", "tls-native-tls", "postgres", "macros", "chrono", "derive"] }
+seventv_gql_api = { path = "shared/integrations/seventv_gql" }
+sqlx = { version = "0.8.6", features = [
+    "runtime-tokio-rustls",
+    "tls-native-tls",
+    "postgres",
+    "macros",
+    "chrono",
+    "derive",
+] }
 thiserror = "2.0.12"
 tokio = { version = "1.46.1", features = ["full"] }
 tower = "0.5.2"
@@ -37,6 +47,7 @@ tracing-subscriber = { version = "0.3.19", features = ["env-filter"] }
 twitch_api = "0.7.2"
 twitch-irc = "5.0.1"
 ulid = { version = "1.2.1", features = ["serde"] }
-utoipa = { version = "5.4.0", features = ["chrono"]}
+url = "2.5.4"
+utoipa = { version = "5.4.0", features = ["chrono"] }
 utoipa-axum = "0.2"
 utoipa-swagger-ui = { version = "9.0.2", features = ["axum"] }
