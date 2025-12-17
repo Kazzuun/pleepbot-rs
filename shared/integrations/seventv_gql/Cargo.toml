@@ -1,0 +1,17 @@
+[package]
+name = "seventv_gql_api"
+version = "0.1.0"
+description = "A wrapper for 7tv GraphQL V4 API"
+edition.workspace = true
+publish = false
+
+[dependencies]
+chrono.workspace = true
+cynic.workspace = true
+reqwest.workspace = true
+thiserror.workspace = true
+tracing.workspace = true
+ulid.workspace = true
+
+[build-dependencies]
+cynic-codegen.workspace = true

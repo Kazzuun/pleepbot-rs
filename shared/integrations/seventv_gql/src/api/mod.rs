@@ -1,0 +1,19 @@
+pub(crate) mod badges;
+pub(crate) mod emote_sets;
+pub(crate) mod emotes;
+pub(crate) mod paints;
+pub(crate) mod products;
+pub(crate) mod roles;
+pub(crate) mod store;
+pub(crate) mod user_editors;
+pub(crate) mod users;
+
+pub(crate) use badges::BadgeService;
+pub(crate) use emote_sets::EmoteSetService;
+pub(crate) use emotes::EmoteService;
+pub(crate) use paints::PaintService;
+pub(crate) use products::ProductService;
+pub(crate) use roles::RoleService;
+pub(crate) use store::StoreService;
+pub(crate) use user_editors::UserEditorService;
+pub(crate) use users::UserService;
