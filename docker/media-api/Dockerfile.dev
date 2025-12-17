@@ -1,0 +1,16 @@
+# TODO: use cargo chef
+
+FROM rust:1.90
+
+RUN apt-get update && apt-get install -y \
+    pkg-config \
+    libssl-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN cargo install cargo-watch
+
+WORKDIR /workspace
+
+COPY . .
+
+CMD ["cargo", "watch", "-x", "run --bin link_shortener"]

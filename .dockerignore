@@ -1,0 +1,27 @@
+# Compilation
+target/
+
+# Database
+.sqlx/
+migrations/
+
+# Docker
+docker/
+.dockerignore
+
+# Git
+.git
+.gitignore
+.gitattributes
+
+# Env
+.env*
+*.md
+*.sql
+
+# Just
+Justfile
+
+# Editor
+.vscode/
+.idea/

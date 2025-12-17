@@ -1,0 +1,52 @@
+services:
+  # link_shortener:
+  #   container_name: media-api
+  #   build:
+  #     context: .
+  #     dockerfile: docker/media-api/Dockerfile.dev
+  #   restart: unless-stopped
+  #   ports:
+  #     - "3001:3000"
+  #   env_file:
+  #     - .env
+  #     - ./apps/media-api/.env
+  #   environment:
+  #     - PGUSER=${POSTGRES_USER}
+  #     - PGPASSWORD=${POSTGRES_PASSWORD}
+  #     - PGDATABASE=media-api
+  #     - PGHOST=database
+  #     - PGPORT=5432
+  #   volumes:
+  #     - .:/workspace
+  #     - ./apps/media-api:/workspace/apps/media-api
+  #   depends_on:
+  #     database:
+  #      condition: service_healthy
+
+  database:
+    image: postgres:17.5
+    container_name: pleepbot_db
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    environment:
+      # For creating the database
+      - POSTGRES_USER=pleepbot
+      - POSTGRES_PASSWORD=pleepbot
+      - POSTGRES_DB=postgres
+      # For healthcheck
+      - PGUSER=pleepbot
+      - PGPASSWORD=pleepbot
+      - PGDATABASE=postgres
+    volumes:
+      - pleepbot_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Load balancer
+
+volumes:
+  pleepbot_data:
