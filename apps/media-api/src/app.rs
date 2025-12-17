@@ -1,12 +1,12 @@
 use axum::Router;
-use sqlx::PgPool;
 
-use crate::routes::shorten;
-use crate::routes::slug;
+use crate::shorten;
+use crate::slug;
+use crate::state::AppState;
 
-pub fn router(pool: PgPool) -> Router {
+pub fn router(state: AppState) -> Router {
     Router::new()
         .merge(shorten::router())
         .merge(slug::router())
-        .with_state(pool)
+        .with_state(state)
 }

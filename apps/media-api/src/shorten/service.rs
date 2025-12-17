@@ -1,28 +1,15 @@
 use axum::{Json, extract::State, http::StatusCode};
 use axum_extra::{TypedHeader, headers::Host};
-use chrono::{DateTime, Utc};
-use serde::{Deserialize, Serialize};
-use sqlx::postgres::PgPool;
 use url::Url;
 
-use crate::{error::AppError, routes::shorten::service};
-
-#[derive(Deserialize, utoipa::ToSchema)]
-pub struct CreateShortUrlRequest {
-    url: String,
-    expires_at: Option<DateTime<Utc>>,
-}
-
-#[derive(Serialize, utoipa::ToSchema)]
-pub struct ShortUrlResponse {
-    slug: String,
-    short_url: String,
-}
+use super::dto::{CreateShortUrlRequest, ShortUrlResponse};
+use super::repository::ShortenRepositoryState;
+use crate::error::AppError;
 
 #[rustfmt::skip]
 #[utoipa::path(
-    post, 
-    path = "/shorten", 
+    post,
+    path = "/shorten",
     request_body = CreateShortUrlRequest,
     responses(
         (status = 201, description = "Short URL created", body = ShortUrlResponse),
@@ -32,7 +19,7 @@ pub struct ShortUrlResponse {
 )]
 pub async fn create_short_url(
     TypedHeader(host): TypedHeader<Host>,
-    State(pool): State<PgPool>,
+    State(shorten_repo): State<ShortenRepositoryState>,
     Json(payload): Json<CreateShortUrlRequest>,
 ) -> Result<(StatusCode, Json<ShortUrlResponse>), AppError> {
     // TODO: expires after a certain number of clicks
@@ -42,17 +29,19 @@ pub async fn create_short_url(
         let fixed = format!("https://{}", payload.url);
         Url::parse(&fixed)
     }
-    .map_err(|_| AppError::InvalidRequest("Invalid URL".to_string()))?;
+    .map_err(|_| AppError::InvalidRequest("invalid URL".to_string()))?;
 
     if let Some(expiration_time) = payload.expires_at {
         if expiration_time < chrono::Utc::now() {
             return Err(AppError::InvalidRequest(
-                "Expiration time cannot be in the past".to_string(),
+                "expiration time cannot be in the past".to_string(),
             ));
         }
     }
 
-    let slug = service::create_short_url(&pool, url.as_str(), payload.expires_at).await?;
+    let slug = shorten_repo
+        .create_short_url(url.as_str(), payload.expires_at)
+        .await?;
 
     let url = if host.hostname() == "localhost" {
         // Only used for testing locally
@@ -60,7 +49,7 @@ pub async fn create_short_url(
             "http://{}:{}/{}",
             host.hostname(),
             host.port().ok_or(AppError::InvalidRequest(
-                "Port not specified for localhost in Host header".to_string()
+                "port not specified for localhost in Host header".to_string()
             ))?,
             slug
         )

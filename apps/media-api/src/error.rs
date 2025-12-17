@@ -9,8 +9,9 @@ use thiserror::Error;
 
 #[derive(Error, Debug)]
 pub enum AppError {
-    // #[error("Unexpected error: {0}")]
-    // InternalError(String),
+    #[error("Unexpected error: {0}")]
+    InternalError(String),
+
     #[error("Database error")]
     DatabaseError(#[from] SqlxError),
 
@@ -27,7 +28,7 @@ pub enum AppError {
 impl IntoResponse for AppError {
     fn into_response(self) -> Response {
         let status = match self {
-            // AppError::InternalError(_) => StatusCode::INTERNAL_SERVER_ERROR,
+            AppError::InternalError(_) => StatusCode::INTERNAL_SERVER_ERROR,
             AppError::DatabaseError(_) => StatusCode::INTERNAL_SERVER_ERROR,
             AppError::LinkNotFound => StatusCode::NOT_FOUND,
             AppError::LinkExpired => StatusCode::GONE,

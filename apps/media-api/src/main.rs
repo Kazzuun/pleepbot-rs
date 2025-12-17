@@ -1,25 +1,27 @@
 mod app;
 mod error;
-mod routes;
+mod shorten;
+mod slug;
+mod state;
 
 use std::net::{Ipv4Addr, SocketAddr};
 
-use db::connection::DatabaseConfig;
-
-// https://github.com/tokio-rs/axum/tree/main/examples/sqlx-postgres
-// https://github.com/nakamuraos/axum-postgres-boilerplate
+use crate::state::AppState;
 
 #[tokio::main]
 async fn main() {
-    let db_config = DatabaseConfig::from_env().expect("Failed to load database settings");
-    let pool = db_config
-        .pg_pool_connect(5)
+    let state = AppState::new()
         .await
-        .expect("Failed to connect to the database");
+        .expect("Failed to initialize app state");
 
-    let app = app::router(pool);
+    let app = app::router(state);
 
     let address = SocketAddr::from((Ipv4Addr::UNSPECIFIED, 3000));
-    let listener = tokio::net::TcpListener::bind(address).await.unwrap();
-    axum::serve(listener, app).await.unwrap();
+    let listener = tokio::net::TcpListener::bind(address)
+        .await
+        .expect("Failed to bind address");
+
+    axum::serve(listener, app)
+        .await
+        .expect("Failed to serve app");
 }

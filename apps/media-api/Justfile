@@ -1,0 +1,48 @@
+database_user := "pleepbot"
+database_password := "pleepbot"
+database_name := "media-api"
+database_url_base := "postgresql://pleepbot:pleepbot@localhost:5432/media-api"
+
+default:
+    @just --list
+
+# Creates the databse
+@db-init:
+    sqlx database create -D {{database_url_base}} \
+        && echo "Created database";
+
+# Creates the databse and runs all the pending migrations
+@db-setup:
+    sqlx database setup --source ./apps/$crate/migrations -D {{database_url_base}} \
+        && echo "Created database and ran migrations";
+
+[confirm]
+@db-drop:
+    sqlx database drop -D {{database_url_base}} \
+        && echo "Dropped database $crate";
+
+@db-schema-dump:
+    PGPASSWORD=database_password pg_dump --schema-only \
+        -h localhost \
+        -p 5432 \
+        -U database_user \
+        -d database_name \
+        --no-owner --no-privileges \
+        > ./docs/schema_dump.sql \
+    && echo "Dumped database schema";
+
+alias migrate-add := migrate-create
+migrate-create description:
+    sqlx migrate add -s -r --source ./migrations {{description}}
+
+alias migrate-up := migrate-run
+migrate-run *args:
+    sqlx migrate run --source ./migrations -D {{database_url_base}} {{ args }}
+
+alias migrate-down := migrate-revert
+migrate-revert *args:
+    sqlx migrate revert --source ./migrations -D {{database_url_base}} {{ args }}
+
+@sqlx-prepare:
+    cargo sqlx prepare --database-url {{database_url_base}} \
+        && echo "Prapered sqlx queries";

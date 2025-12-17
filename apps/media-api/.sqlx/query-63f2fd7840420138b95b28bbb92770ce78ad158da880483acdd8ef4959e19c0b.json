@@ -1,0 +1,14 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "INSERT INTO clicks (link_id) VALUES ((SELECT id FROM links WHERE slug = $1))",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Left": [
+        "Text"
+      ]
+    },
+    "nullable": []
+  },
+  "hash": "63f2fd7840420138b95b28bbb92770ce78ad158da880483acdd8ef4959e19c0b"
+}
