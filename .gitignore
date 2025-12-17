@@ -1,7 +1,6 @@
+.DS_Store
+
 target/
+
 .vscode/*
 !.vscode/extensions.json
-.env*
-!.envrc
-*.log
-**/.DS_Store
